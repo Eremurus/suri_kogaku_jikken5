@@ -18,3 +18,5 @@ while(abs(dfdx(x)) > epsilon):
     k += 1
 
 print(x)
+print(dfdx(x))
+print(k)

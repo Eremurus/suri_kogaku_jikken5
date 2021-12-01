@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 def f(x):#関数 f(x)を定義
     x0 = x[0]
@@ -58,11 +59,15 @@ x = np.array([1.0, 1.0]) #x の初期値
 k = 0 #繰り返し回数
 
 #反復
+t1 = time.time()
 while(norm(grad(x)) > epsilon):
     d = -mat_cross_vec(inverse(hesse(x)),grad(x))
     t = backtrack(x, d) #ステップサイズ
     x += (t * d) #更新
     k += 1
+t2 = time.time()
 
 print(x)
 print(grad(x))
+print(k)
+print(t2 - t1)

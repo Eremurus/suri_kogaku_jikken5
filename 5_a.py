@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 def f(x):#関数 f(x)を定義
     x0 = x[0]
@@ -30,11 +31,15 @@ epsilon = 0.1 ** 6 #イプシロン
 x = np.array([1.0, 1.0]) #x の初期値
 k = 0 #繰り返し回数
 
+t1 = time.time()
 while(norm(grad(x)) > epsilon):
     d = -grad(x)
     t = backtrack(x, d) #ステップサイズ
     x += (t * d) #更新
     k += 1
+t2 = time.time()
 
 print(x)
 print(grad(x))
+print(k)
+print(t2-t1)

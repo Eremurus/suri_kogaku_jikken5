@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 y = np.array([1.5, 2.25, 2.625])
 
@@ -38,7 +39,7 @@ def hesse(x):#f(x) のhesse 行列を返す
         d2fidx0x0 = 0.0
         d2fidx0x1 = (i+1)*(x1**i)
         d2fidx1dx0 = (i+1)*(x1**i)
-        if i != 2:
+        if i == 0:
             d2fidx1dx1 = 0.0
         else:
             d2fidx1dx1 = i * (i+1) * x0 * (x1 ** (i-1))
@@ -71,48 +72,43 @@ def backtrack(x, d):#backtrack 法
 def norm(x): #ベクトルのノルムを計算
     return np.sqrt(np.sum(x ** 2))
 
-def inverse(x):#行列x の逆行列を計算
-    x00 = x[0][0]
-    x01 = x[0][1]
-    x10 = x[1][0]
-    x11 = x[1][1]
-    a00 = x11
-    a01 = -x01
-    a10 = -x10
-    a11 = x00
-    return np.array([[a00, a01],[a10, a11]]) / (a00*a11 - a01*a10)
-
-def mat_cross_vec(A, b):#行列A とベクトルb の掛け算
-    vec = []
-    length = len(b)
-    for i in range(length):
-        vec.append(np.sum(A[i]*b))
-    return np.array(vec)
-
 epsilon = 0.1 ** 6 #イプシロン
 
 #最急降下法
 x = np.array([2.0, 0.0]) #x の初期値
 k = 0 #繰り返し回数
 
+t1 = time.time()
 while(norm(grad(x)) > epsilon):
     d = -grad(x)
     t = backtrack(x, d) #ステップサイズ
     x += (t * d) #更新
     k += 1
+t2 = time.time()
 
 print(x)
 print(grad(x))
+print(k)
+print(t2 - t1)
+print(f(x))
 
 #ニュートン法
 x = np.array([2.0, 0.0]) #x の初期値
 k = 0 #繰り返し回数
 
+t1 = time.time()
 while(norm(grad(x)) > epsilon):
-    d = -mat_cross_vec(inverse(hesse(x)),grad(x))
+    w,v = np.linalg.eig(hesse(x))
+    tau = abs(np.min(w)) + 10.0 ** (-2)
+    
+    d = -np.dot(np.linalg.inv(hesse(x)+tau*np.eye(2)),grad(x))
     t = backtrack(x, d) #ステップサイズ
     x += (t * d) #更新
     k += 1
+t2 = time.time()
 
 print(x)
 print(grad(x))
+print(k)
+print(t2 - t1)
+print(f(x))
