@@ -30,6 +30,8 @@ for n in ([2,5,10]):
     k_newton = 0
     k_gd = 0
     t_list = []
+    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、最急降下法の$n=$",str(n),"の表]{","$n=",str(n),"$の時の最急降下法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適値)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
+    file.writelines(data_list)
     for t_ in range(5):
         x = np.array([1.0 for _ in range(n)])
         Z = np.random.rand(n, n)
@@ -43,16 +45,24 @@ for n in ([2,5,10]):
             k_gd += 1
         t2 = time.time()
         t_list.append(t2 - t1)
-        data_list = ["最急降下法",str(t_+1),"回目の計算","\n","停留点:",str(x),"\n"]
+        kari_hairetu = []
+        for l in range(n):
+            kari_hairetu.append(x[l])
+        data_list = ["\multicolumn{2}{|c|}{最急降下法",str(t_+1),"回目の計算} \\\ \n \hline \n","停留点 &\\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))),"\end{tabular} \\\ \n \hline \n"]
         file.writelines(data_list)
-        data_list = ["勾配:",str(grad(x, A)),"\n"]
+        kari_hairetu = []
+        for l in range(n):
+            kari_hairetu.append(grad(x, A)[l])
+        data_list = ["勾配 &\\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))),"\end{tabular} \\\ \n \hline \n"]
         file.writelines(data_list)
-    data_list = [str(n),"次ベクトルに対する最急降下法のkの平均は ",str(k_gd / 5.0),"\n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の$k$の平均} \\\ \n \hline \n" ,"\multicolumn{2}{|c|}{",str(k_gd / 5.0),"}\\\ \n \hline \n"]
     file.writelines(data_list)
-    data_list = [str(n),"次ベクトルに対する","最急降下法の平均時間は ",str(np.mean(np.array(t_list))),"\n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の平均時間} \\\ \n \hline \n","\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline \n \\end{tabular}  \n \\end{table} \n"]
     file.writelines(data_list)
 
     t_list = []
+    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、ニュートン法の$n=$",str(n),"の表]{","$n=",str(n),"$の時のニュートン法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適値)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
+    file.writelines(data_list)
     for t_ in range(5):
         x = np.array([1.0 for _ in range(n)])
         Z = np.random.rand(n, n)
@@ -68,13 +78,19 @@ for n in ([2,5,10]):
             k_newton += 1
         t2 = time.time()
         t_list.append(t2 - t1)
-        data_list = ["ニュートン法",str(t_+1),"回目の計算","\n","停留点:",str(x), "\n"]
+        kari_hairetu = []
+        for l in range(n):
+            kari_hairetu.append(x[l])
+        data_list = ["\multicolumn{2}{|c|}{ニュートン法",str(t_+1),"回目の計算} \\\ \n \hline \n","停留点 & \\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))), " \end{tabular} \\\ \n \hline \n"]
         file.writelines(data_list)
-        data_list = ["勾配:",str(grad(x, A)),"\n"]
+        kari_hairetu = []
+        for l in range(n):
+            kari_hairetu.append(grad(x,A)[l])
+        data_list = ["勾配 &\\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))),"\end{tabular} \\\ \n \hline \n"]
         file.writelines(data_list)
-    data_list = [str(n), "次ベクトルに対するニュートン法のkの平均は",str(k_newton / 5.0), "\n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の$k$の平均} \\\ \n \hline \n" ,"\multicolumn{2}{|c|}{",str(k_newton / 5.0),"}\\\ \n \hline \n"]
     file.writelines(data_list)
-    data_list = [str(n),"次ベクトルに対する","ニュートン法の平均時間は ",str(np.mean(np.array(t_list))), "\n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の平均時間} \\\ \n \hline \n","\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline \n \\end{tabular}  \n \\end{table} \n"]
     file.writelines(data_list)
 
 file.close()
