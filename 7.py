@@ -24,6 +24,7 @@ def norm(x): #ベクトルのノルムを計算
     return np.sqrt(np.sum(x ** 2))
 
 epsilon = 0.1 ** 6 #イプシロン
+file = open('7.txt', 'w')
 
 for n in ([2,5,10]):
     k_newton = 0
@@ -42,10 +43,14 @@ for n in ([2,5,10]):
             k_gd += 1
         t2 = time.time()
         t_list.append(t2 - t1)
-        print("最急降下法",t_+1,"回目の計算","...","n:",n,"停留点:",x,"\n")
-        print(grad(x, A))
-    print(n,"次の最急降下法のkの平均は ",k_gd / 5.0,"\n")
-    print(n,"次の","最急降下法の平均時間は ",np.mean(np.array(t_list)),"\n")
+        data_list = ["最急降下法",str(t_+1),"回目の計算","\n","停留点:",str(x),"\n"]
+        file.writelines(data_list)
+        data_list = ["勾配:",str(grad(x, A)),"\n"]
+        file.writelines(data_list)
+    data_list = [str(n),"次ベクトルに対する最急降下法のkの平均は ",str(k_gd / 5.0),"\n"]
+    file.writelines(data_list)
+    data_list = [str(n),"次ベクトルに対する","最急降下法の平均時間は ",str(np.mean(np.array(t_list))),"\n"]
+    file.writelines(data_list)
 
     t_list = []
     for t_ in range(5):
@@ -63,7 +68,13 @@ for n in ([2,5,10]):
             k_newton += 1
         t2 = time.time()
         t_list.append(t2 - t1)
-        print("ニュートン法",t_+1,"回目の計算","...","n:",n,"停留点:",x, "\n")
-        print(grad(x, A))
-    print(n, "次のニュートン法のkの平均は",k_newton / 5.0, "\n")
-    print(n,"次の","ニュートン法の平均時間は ",np.mean(np.array(t_list)), "\n")
+        data_list = ["ニュートン法",str(t_+1),"回目の計算","\n","停留点:",str(x), "\n"]
+        file.writelines(data_list)
+        data_list = ["勾配:",str(grad(x, A)),"\n"]
+        file.writelines(data_list)
+    data_list = [str(n), "次ベクトルに対するニュートン法のkの平均は",str(k_newton / 5.0), "\n"]
+    file.writelines(data_list)
+    data_list = [str(n),"次ベクトルに対する","ニュートン法の平均時間は ",str(np.mean(np.array(t_list))), "\n"]
+    file.writelines(data_list)
+
+file.close()
