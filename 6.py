@@ -100,7 +100,7 @@ t1 = time.time()
 while(norm(grad(x)) > epsilon):
     w,v = np.linalg.eig(hesse(x))
     tau = abs(np.min(w)) + 10.0 ** (-2)
-    
+    #修正ニュートン法
     d = -np.dot(np.linalg.inv(hesse(x)+tau*np.eye(2)),grad(x))
     t = backtrack(x, d) #ステップサイズ
     x += (t * d) #更新

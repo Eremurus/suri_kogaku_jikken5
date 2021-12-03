@@ -45,6 +45,7 @@ for n in ([2,5,10]):
             k_gd += 1
         t2 = time.time()
         t_list.append(t2 - t1)
+        
         kari_hairetu = []
         for l in range(n):
             kari_hairetu.append(x[l])
