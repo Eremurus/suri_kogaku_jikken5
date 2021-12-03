@@ -30,7 +30,7 @@ for n in ([2,5,10]):
     k_newton = 0
     k_gd = 0
     t_list = []
-    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、最急降下法の$n=$",str(n),"の表]{","$n=",str(n),"$の時の最急降下法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適値)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
+    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、最急降下法の$n=$",str(n),"の表]{","$n=",str(n),"$の時の最急降下法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適解)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
     file.writelines(data_list)
     for t_ in range(5):
         x = np.array([1.0 for _ in range(n)])
@@ -48,20 +48,45 @@ for n in ([2,5,10]):
         kari_hairetu = []
         for l in range(n):
             kari_hairetu.append(x[l])
-        data_list = ["\multicolumn{2}{|c|}{最急降下法",str(t_+1),"回目の計算} \\\ \n \hline \n","停留点 &\\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))),"\end{tabular} \\\ \n \hline \n"]
-        file.writelines(data_list)
-        kari_hairetu = []
-        for l in range(n):
-            kari_hairetu.append(grad(x, A)[l])
-        data_list = ["勾配 &\\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))),"\end{tabular} \\\ \n \hline \n"]
-        file.writelines(data_list)
+        file.write("\multicolumn{2}{|c|}{最急降下法")
+        file.write(str(t_+1))
+        file.write("回目の計算} \\\ \n \hline \n")
+        file.write("停留点 & \\begin{tabular}{c}")
+        file.write("(")
+        for i in range(len(kari_hairetu)):
+            if i!=len(kari_hairetu)-1:
+                if i%2 == 0:
+                    file.writelines([str(kari_hairetu[i]),","])
+                else:
+                    file.writelines([str(kari_hairetu[i]),",","\\\\"])
+            else:
+                file.write(str(kari_hairetu[i]))
+        file.write(") \n")
+        file.write("\end{tabular} \\\ \n \hline \n")
+
+        if n != 10:
+            kari_hairetu = []
+            for l in range(n):
+                kari_hairetu.append(grad(x,A)[l])
+            file.write("勾配 &\\begin{tabular}{c}")
+            file.write("(")
+            for i in range(len(kari_hairetu)):
+                if i!=len(kari_hairetu)-1:
+                    if i%2 == 0:
+                        file.writelines([str(kari_hairetu[i]),","])
+                    else:
+                        file.writelines([str(kari_hairetu[i]),",","\\\\"])
+                else:
+                    file.write(str(kari_hairetu[i]))
+            file.write(") \n")
+            file.write("\end{tabular} \\\ \n \hline \n")
     data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の$k$の平均} \\\ \n \hline \n" ,"\multicolumn{2}{|c|}{",str(k_gd / 5.0),"}\\\ \n \hline \n"]
     file.writelines(data_list)
     data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の平均時間} \\\ \n \hline \n","\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline \n \\end{tabular}  \n \\end{table} \n"]
     file.writelines(data_list)
 
     t_list = []
-    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、ニュートン法の$n=$",str(n),"の表]{","$n=",str(n),"$の時のニュートン法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適値)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
+    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、ニュートン法の$n=$",str(n),"の表]{","$n=",str(n),"$の時のニュートン法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適解)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
     file.writelines(data_list)
     for t_ in range(5):
         x = np.array([1.0 for _ in range(n)])
@@ -78,16 +103,43 @@ for n in ([2,5,10]):
             k_newton += 1
         t2 = time.time()
         t_list.append(t2 - t1)
+
         kari_hairetu = []
         for l in range(n):
             kari_hairetu.append(x[l])
-        data_list = ["\multicolumn{2}{|c|}{ニュートン法",str(t_+1),"回目の計算} \\\ \n \hline \n","停留点 & \\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))), " \end{tabular} \\\ \n \hline \n"]
-        file.writelines(data_list)
-        kari_hairetu = []
-        for l in range(n):
-            kari_hairetu.append(grad(x,A)[l])
-        data_list = ["勾配 &\\begin{tabular}{c}",str(tuple(kari_hairetu[l] for l in range(len(kari_hairetu)))),"\end{tabular} \\\ \n \hline \n"]
-        file.writelines(data_list)
+        file.write("\multicolumn{2}{|c|}{ニュートン法")
+        file.write(str(t_+1))
+        file.write("回目の計算} \\\ \n \hline \n")
+        file.write("停留点 & \\begin{tabular}{c}")
+        file.write("(")
+        for i in range(len(kari_hairetu)):
+            if i!=len(kari_hairetu)-1:
+                if i%2 == 0:
+                    file.writelines([str(kari_hairetu[i]),","])
+                else:
+                    file.writelines([str(kari_hairetu[i]),",","\\\\"])
+            else:
+                file.write(str(kari_hairetu[i]))
+        file.write(") \n")
+        file.write("\end{tabular} \\\ \n \hline \n")
+
+        if n != 10:
+            kari_hairetu = []
+            for l in range(n):
+                kari_hairetu.append(grad(x,A)[l])
+            file.write("勾配 &\\begin{tabular}{c}")
+            file.write("(")
+            for i in range(len(kari_hairetu)):
+                if i!=len(kari_hairetu)-1:
+                    if i%2 == 0:
+                        file.writelines([str(kari_hairetu[i]),","])
+                    else:
+                        file.writelines([str(kari_hairetu[i]),",","\\\\"])
+                else:
+                    file.write(str(kari_hairetu[i]))
+            file.write(") \n")
+            file.write("\end{tabular} \\\ \n \hline \n")
+
     data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の$k$の平均} \\\ \n \hline \n" ,"\multicolumn{2}{|c|}{",str(k_newton / 5.0),"}\\\ \n \hline \n"]
     file.writelines(data_list)
     data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の平均時間} \\\ \n \hline \n","\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline \n \\end{tabular}  \n \\end{table} \n"]
