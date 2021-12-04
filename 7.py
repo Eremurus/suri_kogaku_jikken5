@@ -30,7 +30,10 @@ for n in ([2,5,10]):
     k_newton = 0
     k_gd = 0
     t_list = []
-    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、最急降下法の$n=$",str(n),"の表]{","$n=",str(n),"$の時の最急降下法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適解)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
+    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、最急降下法の$n=$",\
+        str(n),"の表]{","$n=",str(n),"$の時の最急降下法の結果.上から順に1回目から5回目まで\
+            の計算で得られた停留点(最適解)の値を記している.下の二つの項目は収束までに要した\
+                反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
     file.writelines(data_list)
     for t_ in range(5):
         x = np.array([1.0 for _ in range(n)])
@@ -81,13 +84,18 @@ for n in ([2,5,10]):
                     file.write(str(kari_hairetu[i]))
             file.write(") \n")
             file.write("\end{tabular} \\\ \n \hline \n")
-    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の$k$の平均} \\\ \n \hline \n" ,"\multicolumn{2}{|c|}{",str(k_gd / 5.0),"}\\\ \n \hline \n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の$k$の平均} \\\ \n \hline \n" ,\
+        "\multicolumn{2}{|c|}{",str(k_gd / 5.0),"}\\\ \n \hline \n"]
     file.writelines(data_list)
-    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の平均時間} \\\ \n \hline \n","\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline \n \\end{tabular}  \n \\end{table} \n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の平均時間} \\\ \n \hline \n",\
+        "\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline \n \\end{tabular}  \n \\end{table} \n"]
     file.writelines(data_list)
 
     t_list = []
-    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、ニュートン法の$n=$",str(n),"の表]{","$n=",str(n),"$の時のニュートン法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適解)の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.}\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
+    data_list = ["\\begin{table}[ht] \n \centering \n \caption[課題7、ニュートン法の$n=$",str(n),"の表]{",\
+        "$n=",str(n),"$の時のニュートン法の結果.上から順に1回目から5回目までの計算で得られた停留点(最適解)\
+            の値を記している.下の二つの項目は収束までに要した反復回数$k$の平均とかかった時間の平均である.\
+                }\n \\begin{tabular}[ht]{|c|c|} \n \hline \n"]
     file.writelines(data_list)
     for t_ in range(5):
         x = np.array([1.0 for _ in range(n)])
@@ -141,9 +149,12 @@ for n in ([2,5,10]):
             file.write(") \n")
             file.write("\end{tabular} \\\ \n \hline \n")
 
-    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の$k$の平均} \\\ \n \hline \n" ,"\multicolumn{2}{|c|}{",str(k_newton / 5.0),"}\\\ \n \hline \n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の$k$の平均}\
+        \\\ \n \hline \n" ,"\multicolumn{2}{|c|}{",str(k_newton / 5.0),"}\\\ \n \hline \n"]
     file.writelines(data_list)
-    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の平均時間} \\\ \n \hline \n","\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline \n \\end{tabular}  \n \\end{table} \n"]
+    data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時のニュートン法の平均時間} \\\ \n\
+        \hline \n","\multicolumn{2}{|c|}{",str(np.mean(np.array(t_list))),"}\\\ \n  \hline\
+        \n \\end{tabular}  \n \\end{table} \n"]
     file.writelines(data_list)
 
 file.close()
