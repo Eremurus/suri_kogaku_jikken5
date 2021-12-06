@@ -61,7 +61,9 @@ k = 0 #繰り返し回数
 #反復
 t1 = time.time()
 while(norm(grad(x)) > epsilon):
-    d = -mat_cross_vec(inverse(hesse(x)),grad(x))
+    w,v = np.linalg.eig(hesse(x))
+    tau = abs(np.min(w)) + 10.0 ** (-2)
+    d = -mat_cross_vec(inverse(hesse(x)+tau*np.eye(2)),grad(x))
     t = backtrack(x, d) #ステップサイズ
     x += (t * d) #更新
     k += 1
