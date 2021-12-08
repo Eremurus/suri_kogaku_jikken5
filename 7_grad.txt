@@ -3,15 +3,15 @@
  \caption[課題7、最急降下法、$n=10$の最適値の表]{$n=10$の時の最急降下法の結果.上から順に1回目から5回目まで                の計算で得られた最適値の値を記している.}
  \begin{tabular}[ht]{|c|c|} 
  \hline 
-最適値 &\begin{tabular}{c}9.508348691686043e-12\end{tabular} \\ 
+1回目最適値 &\begin{tabular}{c}1.508559337846749e-10\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}8.695152491719303e-12\end{tabular} \\ 
+2回目最適値 &\begin{tabular}{c}5.853825182220837e-11\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}1.6785452580109055e-10\end{tabular} \\ 
+3回目最適値 &\begin{tabular}{c}1.465560514240159e-10\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}9.686431965056228e-12\end{tabular} \\ 
+4回目最適値 &\begin{tabular}{c}2.3674046136059143e-11\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}6.118032210590004e-10\end{tabular} \\ 
+5回目最適値 &\begin{tabular}{c}7.032520467792527e-11\end{tabular} \\ 
  \hline 
 \end{tabular}  
  \end{table} 
@@ -20,15 +20,15 @@
  \caption[課題7、ニュートン法、$n=10$の最適値の表]{$n=10$の時のニュートン法の結果.上から順に1回目から5回目まで                の計算で得られた最適値の値を記している.}
  \begin{tabular}[ht]{|c|c|} 
  \hline 
-最適値 &\begin{tabular}{c}1.688743369554442e-10\end{tabular} \\ 
+1回目最適値 &\begin{tabular}{c}5.478809581309229e-10\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}1.4718128573851426e-10\end{tabular} \\ 
+2回目最適値 &\begin{tabular}{c}1.6955587548920313e-10\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}9.277278695580676e-11\end{tabular} \\ 
+3回目最適値 &\begin{tabular}{c}3.854168520032363e-11\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}1.731173745671279e-12\end{tabular} \\ 
+4回目最適値 &\begin{tabular}{c}6.622418343054338e-10\end{tabular} \\ 
  \hline 
-最適値 &\begin{tabular}{c}1.1701450848239743e-11\end{tabular} \\ 
+5回目最適値 &\begin{tabular}{c}6.534147975885927e-10\end{tabular} \\ 
  \hline 
 \end{tabular}  
  \end{table} 

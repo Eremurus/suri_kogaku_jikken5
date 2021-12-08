@@ -81,7 +81,8 @@ for n in ([2,5,10]):
             file.write("\end{tabular} \\\ \n \hline \n")
         
         if n == 10:
-            file_grad.write("最適値 &\\begin{tabular}{c}")
+            file_grad.write(str(t_+1))
+            file_grad.write("回目最適値 &\\begin{tabular}{c}")
             file_grad.write(str(f(x,A)))
             file_grad.write("\end{tabular} \\\ \n \hline \n")               
     data_list = ["\multicolumn{2}{|c|}{$n=",str(n),"$の時の最急降下法の$k$の平均} \\\ \n \hline \n" ,\
@@ -150,7 +151,8 @@ for n in ([2,5,10]):
 
         #n=10 の勾配を出力
         if n == 10:
-            file_grad.write("最適値 &\\begin{tabular}{c}")
+            file_grad.write(str(t_+1))
+            file_grad.write("回目最適値 &\\begin{tabular}{c}")
             file_grad.write(str(f(x, A)))
             file_grad.write("\end{tabular} \\\ \n \hline \n")        
 
@@ -165,7 +167,6 @@ for n in ([2,5,10]):
     if n==10:
         data_grad_list = ["\\end{tabular}  \n \\end{table} \n"]
         file_grad.writelines(data_grad_list)
-
 
 file.close()
 file_grad.close()
