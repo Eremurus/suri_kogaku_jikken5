@@ -40,6 +40,7 @@ while(norm(grad(x)) > epsilon):
 t2 = time.time()
 
 print(x)
+print(f(x))
 print(grad(x))
 print(k)
 print(t2-t1)
